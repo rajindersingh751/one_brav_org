@@ -1,0 +1,6 @@
+- Sails js version 0.12.14
+- Database : MongoDB
+- Change type in development.js file for local / producation
+- Use different port for Socket Communication (Chat / Video)
+- HTTPS certificate 
+- For more info check sails
