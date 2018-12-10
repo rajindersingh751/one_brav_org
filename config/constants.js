@@ -20,7 +20,7 @@ let constants = {
   /** SECRET DATA */
 
   emailId: 'brav.greeting@gmail.com',
-  emailPw: 'Accomplish1!',
+  emailPw: 'Kinder001!',
 
   superSecret: 'kjfdbgklbfjkbfwoiepowfpeio83424084uh4r4ti4uh87tuhw4t873euygqwifh8i37641239eyofh978ft48gn93y0023y12y4364g7teng48t7391',
   SENDGRID_API_KEY: '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',
