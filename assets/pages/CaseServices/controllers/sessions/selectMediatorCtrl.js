@@ -27,10 +27,10 @@ caseServices.controller('selectMediatorCtrl', function ($scope, msApi, $mdDialog
                         mpro.show = true;
                         mpro.name = mediator.name;
                         mpro.tz = mediator.tz;
-                        if (!mediator.hasOwnProperty('currency')) {
+                        if (!mediator.profile.hasOwnProperty('currency')) {
                             mpro.currency = 'USD';
                         } else {
-                            mpro.currency = mediator.currencya;
+                            mpro.currency = mediator.profile.currency;
                         }
                         mpro.rate = mpro.rate / 100;// conversion to Decimal currency like 100 cents to 1 Dollor
                         if (mpro.specialities && mpro.specialities.length > 0) {
