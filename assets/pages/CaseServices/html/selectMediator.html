@@ -16,8 +16,26 @@
       </md-select>
     </md-input-container>
 
+    <md-input-container style="margin:15px;" ng-show="mediatorsArray.length==0">
+      <label>Preferred Age of the Mediator</label>
+      <md-select ng-model="medAge">
+        <md-option ng-repeat="ma in medAges" ng-value="ma.code">
+          {{ma.name}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+
+    <md-input-container style="margin:15px;" ng-show="mediatorsArray.length==0">
+      <label>Preferred Language of the Mediator</label>
+      <md-select ng-model="medLanguage">
+        <md-option ng-repeat="ml in medLanguages" ng-value="ml.code">
+          {{ml.name}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+
     <div ng-hide="true">
-      {{(filteredMediators = (mediators | filter: filterMediator | filter:{currency : paymentCurrency}))}}
+      {{(filteredMediators = (mediators | filter: filterMediator | filter:{currency : paymentCurrency, language: medLanguage, age: medAge}))}}
     </div>
   </md-card>
 
@@ -27,20 +45,21 @@
         <tr md-row>
           <th md-column md-order-by="_id">#</th>
           <th md-column md-numeric>Select</th>
-          <th md-column md-numeric>Name</th>
-          <th md-column md-numeric>Fees : (per Hour)</th>
+          <th md-column md-numeric ng-click="orderByField='name'; reverseSort = !reverseSort">Name<span ng-show="orderByField == 'name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span></th>
+          <th md-column md-numeric ng-click="orderByField='rate'; reverseSort = !reverseSort">Fees : (per Hour)<span ng-show="orderByField == 'rate'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span></th>
           <th md-column md-numeric>Specialities</th>
-          <th md-column md-numeric>Experience</th>
-          <th md-column md-numeric>Timezone</th>
+          <th md-column md-numeric ng-click="orderByField='experience'; reverseSort = !reverseSort">Experience<span ng-show="orderByField == 'experience'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span></th>
+          <th md-column md-numeric ng-click="orderByField='tz'; reverseSort = !reverseSort">Timezone<span ng-show="orderByField == 'tz'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span></th>
           <th md-column md-numeric>Description</th>
         </tr>
       </thead>
       <tbody md-body>
         <!--  ng-if="mediator.currency == paymentCurrency" -->
-        <tr md-row ng-repeat="mediator in filteredMediators | limitTo: query.limit : (query.page -1) * query.limit ">
+        <tr md-row ng-repeat="mediator in filteredMediators |orderBy:orderByField:reverseSort | limitTo: query.limit : (query.page -1) * query.limit">
           <td md-cell>{{ (tableDefaultOptions.query.page - 1) * tableDefaultOptions.query.limit + $index + 1 }}</td>
           <td md-cell>
-            <md-checkbox ng-model="mediator.checked" class="md-primary" aria-label="Select Mediator {{mediator.name}}" ng-click="addOrRemoveMediator(mediator)">
+            <md-checkbox ng-model="mediator.checked" class="md-primary" aria-label="Select Mediator {{mediator.name}}"
+              ng-click="addOrRemoveMediator(mediator)">
             </md-checkbox>
           </td>
           <td md-cell>{{mediator.name}}</td>
@@ -48,14 +67,16 @@
           <td md-cell>{{mediator.specialitiesString}}</td>
           <td md-cell>{{mediator.experience}}</td>
           <td md-cell>{{mediator.tz}}</td>
-          <td md-cell>{{mediator.description.length > 100 ? mediator.description.substring(0,100) + "..." : mediator.description}}</td>
+          <td md-cell>{{mediator.description.length > 100 ? mediator.description.substring(0,100) + "..." :
+            mediator.description}}</td>
 
         </tr>
       </tbody>
     </table>
   </md-table-container>
 
-  <md-button class="md-primary" ng-show="mediatorsArray.length>0" ng-click="sendMediators()">Create Session with Selected Brāv ones</md-button>
+  <md-button class="md-primary" ng-show="mediatorsArray.length>0" ng-click="sendMediators()">Create Session with
+    Selected Brāv ones</md-button>
 
   <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{cases.length}}"
     md-page-select="true" md-boundary-links="true">

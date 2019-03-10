@@ -6,6 +6,21 @@ caseServices.controller('selectMediatorCtrl', function ($scope, msApi, $mdDialog
         { name: 'Euro, EUR', code: 'EUR' },
         { name: 'Please select a currency', code: 'DASH' },
     ]
+    $scope.medAges = [
+        { name: 'Below 18', code: '0-17' },
+        { name: '18-24', code: '18-24' },
+        { name: '25-30', code: '25-30' },
+        { name: '30+', code: '31-200' },
+    ]
+    $scope.medLanguages = [
+        { name: 'English', code: 'en' },
+        { name: 'Spanish', code: 'es' },
+        { name: 'Chinese', code: 'zh' },
+        { name: 'Arabic', code: 'ar' },
+        { name: 'Hindi', code: 'hi'}
+    ]
+    $scope.medLanguage = 'en'
+    $scope.medAge = '25-30'
     $scope.paymentCurrency = 'USD';
     // $scope.$watch('paymentCurrency', function (newValue, oldValue) {
     //     console.log('paymentCurrency changed = ',newValue);
@@ -17,7 +32,6 @@ caseServices.controller('selectMediatorCtrl', function ($scope, msApi, $mdDialog
     // });
     $scope.loadMediatorsPage = function () {
         msApi.getAllMediators(function (res) {
-            console.log(res);
             if (res.ok) {
                 res.list.forEach((mediator) => {
                     let mpro = {};
@@ -32,6 +46,16 @@ caseServices.controller('selectMediatorCtrl', function ($scope, msApi, $mdDialog
                         } else {
                             mpro.currency = mediator.profile.currency;
                         }
+                        if (!mediator.profile.hasOwnProperty('language')) {
+                            mpro.language = 'en';
+                        } else {
+                            mpro.language = mediator.profile.language;
+                        }
+                        if (!mediator.profile.hasOwnProperty('age')) {
+                            mpro.age = '25-30';
+                        } else {
+                            mpro.age = mediator.profile.age;
+                        }
                         mpro.rate = mpro.rate / 100;// conversion to Decimal currency like 100 cents to 1 Dollor
                         if (mpro.specialities && mpro.specialities.length > 0) {
                             mpro.specialitiesString = mpro.specialities.reduce((o, sum) => { return "" + o + "" + sum + ", " }, '');
@@ -42,6 +66,7 @@ caseServices.controller('selectMediatorCtrl', function ($scope, msApi, $mdDialog
                         }
                     }
                 });
+                console.log($scope.mediators)
             }
         });
     };
