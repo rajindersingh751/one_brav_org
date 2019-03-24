@@ -49,6 +49,7 @@ module.exports = {
         case 'Individual':
           {
             obj.type = 4;
+            obj.guest = req.body.guest;
             break;
           }
         case 'Professional Mediator':
@@ -132,7 +133,6 @@ module.exports = {
 
   verifyOTP: function (req, res) {
     console.log("POST /verify");
-
     //email, otp
     if (req.body.hasOwnProperty('email') && req.body.hasOwnProperty('otp')) {
       var obj = {

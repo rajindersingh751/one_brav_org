@@ -52,6 +52,10 @@ app.config(function ($routeProvider, $mdThemingProvider) {
       templateUrl: 'pages/login/reg.html',
       controller: 'regAuthCtrl'
     })
+    .when("/guest", {
+      templateUrl: 'pages/login/guest.html',
+      controller: 'regAuthCtrl'
+    })
     .when("/reset", {
       templateUrl: 'pages/login/reset.html',
       controller: 'resetCtrl'
@@ -257,6 +261,7 @@ var LoginAPICaller = {
         "pw": user.pw,
         "type": user.type,
         "agree": user.agree,
+        "guest": user.guest,
       })
     };
     LoginAPICaller.http(settings).success(next);
@@ -504,6 +509,33 @@ function regAuthCtrl($scope, $http, $mdToast) {
   $scope.user = {
     type: 'Individual',
     agree: false
+  };
+
+  // signup a guest account
+  $scope.submit3 = function () {
+    $scope.user.type = 'Individual'
+    $scope.user.email = 'testGuest@brav.com'
+    $scope.user.pw = '123456'
+    $scope.user.otp = 'otp123456'
+    $scope.user.guest = true;
+    console.log('In submit3()', $scope.user)
+    if (!$scope.user.name) {
+      toastNow($mdToast, "Please enter a name in the form");
+    } else {
+      LoginAPICaller.signup($scope.user, function (res) {
+        $scope.pw = '';
+        console.log('res from LoginAPICaller.signup', res)
+        if (res.ok) {
+          // toastNow($mdToast, "Please find the OTP in your email inbox of : " + $scope.user.email);
+          LoginAPICaller.verify($scope.user, function () {
+            $scope.showForm = 2;
+          });
+        } else {
+          $scope.showWhich = 0;
+          toastNow($mdToast, 'Issue: ' + res.message);
+        }
+      });
+    }
   };
 
   $scope.submit1 = function () {

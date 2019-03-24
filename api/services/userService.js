@@ -38,7 +38,7 @@ module.exports = {
         if (!doc) { // no otp was sent
           cb(true);
         } else {
-          if (doc.otp == obj.otp) {
+          if (doc.otp == obj.otp || doc.data.guest) {
             // verified :
             OtpLogs.native(function (err2, collection) {
               collection.update({ email: obj.email }, { "$set": { active: false } },

@@ -1,0 +1,98 @@
+<style>
+    .new--background,
+    .new--background md-content {
+      background: #598EBF;
+    }
+  
+    .new--label-temp {
+      color: #fff;
+    }
+  
+    /* md-radio-button.new--radio-button .md-off {
+        border-color: #fff;
+    }
+    
+    md-radio-button.md-checked.new--radio-button .md-on {
+        background-color: blue;
+    } */
+  
+    .new--form-control {
+      background: #CCDCEB !important;
+      height: 40px !important;
+      border: solid 1px;
+    }
+  
+    .new--radio-checkbox {
+      color: #fff;
+    }
+  
+    .new--link-use {
+      text-decoration: underline;
+    }
+  
+    .new--link-use:hover,
+    .new--link-use:active {
+      background: transparent !important;
+      color: #fff !important;
+      text-decoration: underline;
+    }
+  
+    .new--submit-button {
+      color: #fff !important;
+      background: #000;
+      border-radius: 0 !important
+    }
+  
+    .new--submit-button:hover,
+    .new--submit-button:active {
+      color: #fff !important;
+      background-color: rgba(0, 0, 0) !important;
+      opacity: 0.8;
+    }
+  
+  </style>
+  
+  <div id="regform1" ng-show="showWhich==0" class="new--background">
+    <div class="center">
+      <h1>Sign up</h1>
+    </div>
+  
+    <div layout="row" layout-align="center center">
+      <md-content flex="50">
+        <form name="projectForm" autocomplete="off" novalidate>
+  
+          <div class="label-color new--label-temp">
+            <label>Account Type</label>
+          </div>
+  
+          <md-input-container class="md-block">
+            <md-radio-group ng-model="user.type" layout="column">
+              <md-radio-button class="new--radio-button" value="Guest" class="ma1">Guest</md-radio-button>
+            </md-radio-group>
+          </md-input-container>
+  
+          <md-input-container class="md-block" md-no-float>
+            <input class="new--form-control" required type="text" name="clientName" ng-model="user.name" placeholder="{{user.type}}'s Name"
+            />
+  
+            <div ng-messages="projectForm.clientName.$error" role="alert">
+              <div ng-message-exp="['required']">
+                Please enter your name.
+              </div>
+            </div>
+          </md-input-container>
+  
+          <md-input-container class="md-block">
+            <md-checkbox class="new--radio-checkbox" name="tos" ng-model="user.agree" required>
+              I agree to the
+            </md-checkbox>
+            <md-button class="new--link-use" ng-href="http://brav.org/faq.html" target="_blank">Brāv terms and conditions</md-button>
+  
+          </md-input-container>
+  
+          <md-button class="new--submit-button" type="submit" ng-click="submit3()" ng-disabled="!user.agree" ng-class="!user.agree ? 'cursor-not-allowed': 'pointer'">Verifyxdddx</md-button>
+  
+        </form>
+      </md-content>
+    </div>
+  </div>

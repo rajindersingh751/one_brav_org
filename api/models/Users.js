@@ -12,8 +12,8 @@ module.exports = {
     MEDIATOR:2,
     ORG:3,
     INDIVIDUAL: 4,   
-    MEDIATOR_ORG:22
-    
+    MEDIATOR_ORG:22,
+
   },
 
   attributes: {
@@ -29,6 +29,10 @@ module.exports = {
     profile : 'json', 
     //added from br
     online : {
+      type: 'BOOLEAN',
+      default: false
+    },
+    guest : {
       type: 'BOOLEAN',
       default: false
     }
