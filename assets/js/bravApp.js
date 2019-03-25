@@ -514,7 +514,7 @@ function regAuthCtrl($scope, $http, $mdToast) {
   // signup a guest account
   $scope.submit3 = function () {
     $scope.user.type = 'Individual'
-    $scope.user.email = 'testGuest@brav.com'
+    $scope.user.email = '@bravguestaccount.com'
     $scope.user.pw = '123456'
     $scope.user.otp = 'otp123456'
     $scope.user.guest = true;
@@ -522,6 +522,7 @@ function regAuthCtrl($scope, $http, $mdToast) {
     if (!$scope.user.name) {
       toastNow($mdToast, "Please enter a name in the form");
     } else {
+      $scope.user.email = $scope.user.name + $scope.user.email
       LoginAPICaller.signup($scope.user, function (res) {
         $scope.pw = '';
         console.log('res from LoginAPICaller.signup', res)
