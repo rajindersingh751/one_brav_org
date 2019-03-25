@@ -163,12 +163,10 @@ module.exports = {
 
   signOut: function (req, res) {
     console.log("logout request came");
+    var userId = JSON.stringify(req.session.userId)
+    userService.removeIfGuest(userId,okObj => res.json(okObj));
     req.session.userId = '';
     req.session.loggedin = false;
-    res.json({
-      ok: true,
-      message: 'bye bye'
-    });
     // Pre Expire the JWT here : need lookup
   },
 

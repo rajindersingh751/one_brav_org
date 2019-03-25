@@ -288,6 +288,7 @@ bravAuthModule.service('bravHomeApi', function ($http, bravAuthData) {
       }
     }
     $http(settings).success(function (response) {
+      console.log('resp: ', response)
       if (response.ok) {
         bravAuthData.clearAuth();
         window.location = '/#/login';

@@ -202,8 +202,24 @@ module.exports = {
     });
   },
 
-  removeGuest: function (obj, cb) {
-    
+  removeIfGuest: function (userId, cb) {
+    userId = eval(userId)
+    var ouid = uuidHelperService.makeObjectId(userId)
+
+    Users.native(function (er1, collection) {
+      collection.findOne({_id: ouid}, function (err, doc) {
+        if (err == null) {
+          console.log('doc', doc)
+          if (doc.guest) {
+            collection.deleteOne({_id: ouid})
+            return cb({ ok: true, message: 'bye bye guest' })
+          } else {
+            return cb({ ok: true,  message: 'bye bye'})
+          }
+        }
+        return cb({ ok: false, message: 'db error' })
+      })
+    })
   }
 
   /** Feb 2017 */
