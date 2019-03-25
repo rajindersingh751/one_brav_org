@@ -202,6 +202,10 @@ module.exports = {
     });
   },
 
+  removeGuest: function (obj, cb) {
+    
+  }
+
   /** Feb 2017 */
   // Users to add to their profiles
 
