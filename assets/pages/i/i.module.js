@@ -17,34 +17,34 @@ var iApp = angular.module('bravApp', [
 
 });
 
-iApp.service('iApi', function ($http, bravAuthData) {
+// iApp.service('iApi', function ($http, bravAuthData) {
 
-  this.getProfile = function (next) {
-    console.log("calling i get profile");
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "/i/api/profile",
-      "method": "GET",
-      "headers": {
-        "content-type": "application/x-www-form-urlencoded",
-        "cache-control": "no-cache",
-        "x-access-token": bravAuthData.auth.token
-      },
-      "data": bodyparser({})
-    };
-    $http(settings).success(function (response) {
-      console.log(response);
-      if (response.ok) {
-        next(response.data);
-      } else {
-        alert("failed to fetch data");
-        window.location = '#';
-      }
-    });
-  };
+//   this.getProfile = function (next) {
+//     console.log("calling i get profile");
+//     var settings = {
+//       "async": true,
+//       "crossDomain": true,
+//       "url": "/i/api/profile",
+//       "method": "GET",
+//       "headers": {
+//         "content-type": "application/x-www-form-urlencoded",
+//         "cache-control": "no-cache",
+//         "x-access-token": bravAuthData.auth.token
+//       },
+//       "data": bodyparser({})
+//     };
+//     $http(settings).success(function (response) {
+//       console.log(response);
+//       if (response.ok) {
+//         next(response.data);
+//       } else {
+//         alert("failed to fetch data");
+//         window.location = '#';
+//       }
+//     });
+//   };
 
-});
+// });
 
 iApp.controller('sidebarLinksCtrl', function (bravHomeApi, tippyApi) {
   /** Links here */
@@ -68,19 +68,9 @@ iApp.controller('sidebarLinksCtrl', function (bravHomeApi, tippyApi) {
       sub:
         [
           {
-            title: 'Create Session',
-            src: "img/Icons/NewSession.png",
-            href: '#/m/select'
-          },
-          {
-            title: 'My Sessions',
-            src: "img/Icons/AllSessions.png",
-            href: '#/ms/all'
-          },
-          {
-            title: 'Session Requests',
-            src: "img/Icons/SessionRequests.png",
-            href: '#/ms/requests'
+            title: 'My Calendar',
+            src: "img/Icons/MyCalendar.png",
+            href: '#/ms/calendar'
           },
           {
             title: 'Create Case',
@@ -91,6 +81,21 @@ iApp.controller('sidebarLinksCtrl', function (bravHomeApi, tippyApi) {
             title: 'My cases',
             src: "img/Icons/AllCases.png",
             href: '#/case/all'
+          },
+          {
+            title: 'Create Session',
+            src: "img/Icons/NewSession.png",
+            href: '#/m/select'
+          },
+          {
+            title: 'Session Requests',
+            src: "img/Icons/SessionRequests.png",
+            href: '#/ms/requests'
+          },
+          {
+            title: 'My Sessions',
+            src: "img/Icons/AllSessions.png",
+            href: '#/ms/all'
           }
         ]
     },

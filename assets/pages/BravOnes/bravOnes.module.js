@@ -239,19 +239,9 @@ bravOnes.controller('sidebarLinksCtrl',function (bravHomeApi) {
           sub:
             [
               {
-                title:'Create Session',
-                src: "img/Icons/NewSession.png",
-                href:'#/ms/new'
-              },
-              {
-                title:'All Sessions',
-                src: "img/Icons/AllSessions.png",
-                href:'#/ms/all'
-              },
-              {
-                title:'Session Requests',
-                src: "img/Icons/SessionRequests.png",
-                href:'#/ms/requests'
+                title:'My Calendar',
+                src: "img/Icons/MyCalendar.png",
+                href:'#/ms/calendar'
               },
               {
                 title:'Create Case',
@@ -262,6 +252,21 @@ bravOnes.controller('sidebarLinksCtrl',function (bravHomeApi) {
                 title:'All Cases',
                 src: "img/Icons/AllCases.png",
                 href:'#/case/all'
+              },
+              {
+                title:'Create Session',
+                src: "img/Icons/NewSession.png",
+                href:'#/ms/new'
+              },
+              {
+                title:'Session Requests',
+                src: "img/Icons/SessionRequests.png",
+                href:'#/ms/requests'
+              },
+              {
+                title:'All Sessions',
+                src: "img/Icons/AllSessions.png",
+                href:'#/ms/all'
               }
             ]
         },

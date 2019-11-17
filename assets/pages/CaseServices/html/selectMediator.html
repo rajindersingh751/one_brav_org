@@ -58,7 +58,7 @@
         <tr md-row ng-repeat="mediator in filteredMediators |orderBy:orderByField:reverseSort | limitTo: query.limit : (query.page -1) * query.limit">
           <td md-cell>{{ (tableDefaultOptions.query.page - 1) * tableDefaultOptions.query.limit + $index + 1 }}</td>
           <td md-cell>
-            <md-checkbox ng-model="mediator.checked" class="md-primary" aria-label="Select Mediator {{mediator.name}}"
+            <md-checkbox ng-model="mediator.checked" aria-label="Select Mediator {{mediator.name}}"
               ng-click="addOrRemoveMediator(mediator)">
             </md-checkbox>
           </td>
@@ -75,8 +75,7 @@
     </table>
   </md-table-container>
 
-  <md-button class="md-primary" ng-show="mediatorsArray.length>0" ng-click="sendMediators()">Create Session with
-    Selected Brāv ones</md-button>
+  <md-button class="md-primary button" ng-click="sendMediators()">Create Session with Selected Brāv ones</md-button>
 
   <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{cases.length}}"
     md-page-select="true" md-boundary-links="true">

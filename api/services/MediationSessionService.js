@@ -139,7 +139,7 @@ module.exports = {
                         creator: creator,
                         payment: {
                             // ref :paymentRef,
-                            status: MediationSession.flags.PAYMENT_NOT_INITIATED,
+                            status: MediationSession.flags.PAYMENT_BYPASSED,
                             // hours_paid:hours_paid
                             // type :
                         },

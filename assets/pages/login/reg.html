@@ -113,11 +113,11 @@
           <md-checkbox class="new--radio-checkbox" name="tos" ng-model="user.agree" required>
             I agree to the
           </md-checkbox>
-          <md-button class="new--link-use" ng-href="http://brav.org/faq.html" target="_blank">Brāv terms and conditions</md-button>
+          <md-button class="new--link-use button" ng-href="/#/terms">Brāv terms and conditions</md-button>
 
         </md-input-container>
 
-        <md-button class="new--submit-button" type="submit" ng-click="submit1()" ng-disabled="!user.agree" ng-class="!user.agree ? 'cursor-not-allowed': 'pointer'">Verify</md-button>
+        <md-button class="new--submit-button button" type="submit" ng-click="submit1()" ng-disabled="!user.agree" ng-class="!user.agree ? 'cursor-not-allowed': 'pointer'">Verify</md-button>
 
       </form>
     </md-content>
@@ -142,8 +142,8 @@
             </div>
           </div>
         </md-input-container>
-        <md-button class="new--submit-button" ng-click="submit2()">Sign Up</md-button>
-        <md-button class="new--link-use" type="submit" ng-click="submit0()">Back</md-button>
+        <md-button class="new--submit-button button" ng-click="submit2()">Sign Up</md-button>
+        <md-button class="new--link-use button" type="submit" ng-click="submit0()">Back</md-button>
 
       </form>
     </md-content>

@@ -1,35 +1,105 @@
-<div class="center">
-  <h1 class="f1 black-70 center">My Profile</h1>
-  <div layout="column" layout-align="center center">
-    <article class="mw7 center bg-white br3 pa3 pa4-ns mv3 ba b--black-30 md-whiteframe-24dp">
-      <div layout="column" layout-align="center center">
-        <!-- <div class="dib bg-moon-gray br-100 h4 w4"></div> -->
-        <!-- <img src="" class="br-100 h3 w3 dib" title="Photo of a kitty staring at you"> -->
-        <h1 class="f4">{{user.name}}</h1>
-        <hr class="mw3 bb bw1 b--black-10">
-      </div>
-      <p ng-show="!!user.profile.description" class="lh-copy measure center f6 black-70">
-        {{user.profile.description}}
-      </p>
-      <div layout="row">
-        <span class="flex-1 br4 b--gray ba bw1 pa2 ma2">Profile: {{user.profile.approved ? " Approved" : " Not Approved"}}</span>
-        <span class="flex-1 br4 b--gray ba bw1 pa2 ma2">Experience: {{user.profile.experience}}</span>
-      </div>
-      <div ng-if="user.profile.proMediatorStatusRequested" layout="row">
-        <span  class="flex-1 br4 b--gray ba bw1 pa2 ma2">Professional Mediator Status: {{user.profile.proMediatorStatusApprved ? "Approved" : "Not Approved"}}</span>
-      </div>
-      <div class="br4 b--gray ba bw1 bg-lightest-blue black pa2 ma2">Email: {{user.email}} </div>
-      <div class="br4 b--gray ba bw1 pa2 ma2">Preferred Time Zone : {{user.tz}}</div>
-      <div class="br4 b--gray ba bw1 bg-lightest-blue black pa2 ma2">Session Fees: {{user.profile.rate}} {{user.profile.currency}} per Hour</div>
-      <div class="br4 b--gray ba bw1 pa2 ma2">Auto Accept Mediation Request: {{user.profile.autoAccept?'Yes':'No'}}</div>
-      <div class="br4 b--gray ba bw1 bg-lightest-blue black pa2 ma2">
-        Have International Insurance{{user.profile.hasInternationalInsurance? ': Yes':': No (It is Mandatory to have)'}}
-      </div>
-      <span ng-show="!!user.profile.specialities" class="fw8 pa2 ma2">Specialities:</span>
-      <div layout="row" layout-wrap>
-        <span class="br4 pa2 ma2 w-40 flex-basis-40 flex-1 bg-brav-secondary-dark-blue white" ng-repeat="speciality in user.profile.specialities">{{speciality}}</span>
+<style>
+  body {
+    font-family: 'Raleway', sans-serif !important;
+    font-size:1.5em;
+  }
+  
+  .row {
+    margin-bottom: 10px;
+    border-bottom: solid 1px #EBEBEB;
+  }
+  
+  #edbutton span {
+    color: white !important;
+    font-weight: 800 !important;
+  }
+  .row .row {
+    border-bottom: none;
+    margin-bottom: 10px;
+  }
+  
+  .md-primary {
+      background-color: #5b8fbd !important;
+      height: 36px !important;
+      width: 100% !important;
+      border-radius: 3px !important; 
+      margin-left: 0 !important;
+      border: 0 !important;
+      outline: none !important;
+      color: white !important;
+      font-weight: 800 !important;
+      box-shadow: none !important;
+  }
+</style>
+
+<div class="container" style="width: 80%">
+  <div layout="column">
+    <article class="mw7 center bg-white br3 pa3 pa4-ns mv3 b--black-30 md-whiteframe-24dp" style="max-width: none; text-align:left">
+      <h1 class="f1 black-70" style="margin-left: 30px">MY ACCOUNT</h1>
+      <div class="container" style="margin-left: 0; width: 100%">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="thumbnail">
+              <img src="../../../img/user-img.jpg" alt="user">
+            </div>
+          </div>
+          <div class="col-md-9"> 
+            <p>{{user.name}}</p>
+            <p ng-show="!!user.profile.description" class="lh-copy measure center f6 black-70">
+              {{user.profile.description}}
+            </p>
+            <p>Profile: {{user.profile.approved ? " Approved" : " Not Approved"}}</p>
+            <p>Experience: {{user.profile.experience}}</p>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-3" style="font-weight: 800">
+            CONTACT
+          </div>
+          <div class="col-md-9">
+            <div class = "row">
+              <div class="col-md-6">Email</div>
+              <div class="col-md-6">{{user.email}}</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-3" style="font-weight: 800">
+            BASIC INFORMATION
+          </div>
+          <div class="col-md-9">
+            <div class = "row">
+              <div class="col-md-6">Preferred Timezone</div>
+              <div class="col-md-6">{{user.tz}}</div>
+            </div>
+            <div class = "row" ng-if="user.profile.proMediatorStatusRequested">
+              <div class="col-md-6">Professional Mediator Status</div>
+              <div class="col-md-6">{{user.profile.proMediatorStatusApprved ? "Approved" : "Not Approved"}}</div>
+            </div>
+            <div class = "row">
+              <div class="col-md-6">Session Fees</div>
+              <div class="col-md-6">{{user.profile.rate}} {{user.profile.currency}} per Hour</div>
+            </div>
+            <div class = "row">
+              <div class="col-md-6">Auto Accept Mediation Request</div>
+              <div class="col-md-6">{{user.profile.autoAccept?'Yes':'No'}}</div>
+            </div>
+            <div class = "row">
+              <div class="col-md-6">Have International Insurance</div>
+              <div class="col-md-6">{{user.profile.hasInternationalInsurance? 'Yes':'No (It is Mandatory to have)'}}</div>
+            </div>
+            <div class = "row" ng-show="!!user.profile.specialities">
+              <div class="col-md-6">Specialities</div>
+              <div class="col-md-6">
+                <span class="br4 pa2 ma2 w-40 flex-basis-40 flex-1 bg-brav-secondary-dark-blue white" ng-repeat="speciality in user.profile.specialities">{{speciality}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </article>
-    <md-button class="md-raised md-accent" ng-click="flipper()">Edit/ Update Profile</md-button>
+    <md-button id="edbutton" class="md-raised md-primary" ng-click="flipper()">Edit/ Update Profile</md-button>
   </div>
 </div>

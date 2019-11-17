@@ -1,4 +1,4 @@
-caseServices.controller('createSessionsCtrl', function ($scope, msApi, caseApi, bravAuthData, bravConfig, bravUI, $mdDialog) {
+caseServices.controller('createSessionsCtrl', function ($scope, msApi, caseApi, bravAuthData, bravConfig, bravUI, $mdDialog, bravHomeApi) {
     $scope.puf = bravConfig.PLATFORM_USAGE_FEES;
     $scope.totalCost = 0;
 
@@ -15,22 +15,30 @@ caseServices.controller('createSessionsCtrl', function ($scope, msApi, caseApi, 
             window.location = '#/m/select';
         }
     }
+    
+    $scope.getAllCases = function () {
+        caseApi.getAllCases(function (res) {
+            if (res.ok) {
+                $scope.cases = res.cases.map(function (c) { return { _id: c._id, title: c.title } });
+                if ($scope.cases.length == 0) {
+                    console.log("Going to create a case");
 
-    caseApi.getAllCases(function (res) {
-        if (res.ok) {
-            $scope.cases = res.cases.map(function (c) { return { _id: c._id, title: c.title } });
-            if ($scope.cases.length == 0) {
-                swal({
-                    title: 'You must create a case first to link the session',
-                    type: 'info'
-                });
-                window.location = "#/case/new"
+                    let missingCases = $mdDialog.confirm()
+                      .title('Attention')
+                      .textContent('You must create a case first to link the session')
+                      .ok('Create case')
+                      .cancel('Cancel');
+                    $mdDialog.show(missingCases).then(function () {
+                        window.location = "#/case/new";
+                    }, function () {});
+                }
+            } else {
+                console.log('issue in loading cases');
+                alert('Issue in loading cases');
             }
-        } else {
-            console.log('issue in loading cases');
-            alert('Issue in loading cases')
-        }
-    });
+        });
+    }
+
 
     $scope.updateCost = function () {
         if (!$scope.isMediator) {
@@ -65,7 +73,7 @@ caseServices.controller('createSessionsCtrl', function ($scope, msApi, caseApi, 
             .ariaLabel('Information')
             .targetEvent(ev)
             .ok('Yes create session without other parties!')
-            .cancel('go back');
+            .cancel('Go back');
         let createNow = function () {
             if (!$scope.isMediator) {
                 $scope.sessionObject.mediatorsArray = $scope.mediatorsArray.map((obj) => { return obj.id });
@@ -86,7 +94,8 @@ caseServices.controller('createSessionsCtrl', function ($scope, msApi, caseApi, 
             });
         };
         if (!$scope.sessionObject.title || !$scope.sessionObject.description || !$scope.sessionObject.hours || !$scope.sessionObject.case._id) {
-            bravUI.showSimpleToast('Enter all Fields');
+            console.log($scope.sessionObject);
+            bravUI.showSimpleToast('Enter all fields');
         }
         else
             if ($scope.sessionObject.individualsArray.length == 0) {
@@ -97,4 +106,12 @@ caseServices.controller('createSessionsCtrl', function ($scope, msApi, caseApi, 
             }
     };
 
+    $scope.user = {
+        name:'sample user name',
+        email:'sample_email@brav.org'
+    }
+
+    bravHomeApi.getProfile(function(res) {
+        $scope.user.name = res.name;
+    })
 });

@@ -1,0 +1,35 @@
+<div class="center">
+  <ul style="padding: 0px; list-style-type: none;">
+    <li style="float: left;" ng-click="lastMonth()">&#10094;</li>
+    <li style="float: right;" ng-click="nextMonth()">&#10095;</li>
+    <li><h3 style="font-weight: bold;">{{months[currentTime.getMonth()]}} {{currentTime.getFullYear()}}<h3></li>
+  </ul>
+
+  <md-button class="md-raised md-primary button" ng-click="jumpToCreateSessions()" style="margin-top: 0px; margin-bottom: 0px;">Start Scheduling</md-button>
+
+  <md-table-container>
+  	<table md-table>
+  	  <thead md-head>
+  	    <tr md-row>
+  	      <th md-column style="padding-left: 0px;">Sun</th>
+  	      <th md-column>Mon</th>
+  	      <th md-column>Tue</th>
+  	      <th md-column>Wed</th>
+  	      <th md-column>Thu</th>
+  	      <th md-column>Fri</th>
+  	      <th md-column>Sat</th>
+  	    </tr>	
+  	  </thead>
+  	  <tbody md-body>
+  	  	<tr md-row ng-repeat="week in weeks" style="height: 80px;">
+  	  	  <td md-cell ng-repeat="day in week" ng-style="styleForToday(day)">
+  	  		{{day.getDate()}}
+  	  		<div ng-if="hasScheduleOnThisDate(day)" style="background-color: #598ebf;">
+  	  		  {{showSessions(day)}}
+  	  		</div>
+  	  	  </td>
+  	  	</tr>
+  	  </tbody>
+  	</table>
+  </md-table-container>
+</div>

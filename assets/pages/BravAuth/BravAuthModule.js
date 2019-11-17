@@ -249,6 +249,42 @@ bravAuthModule.service('bravUI', function ($mdToast) {
 
 bravAuthModule.service('bravHomeApi', function ($http, bravAuthData) {
 
+  this.getProfile = function (next) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "/i/api/profile",
+      "method": "GET",
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "cache-control": "no-cache",
+        "x-access-token": bravAuthData.auth.token
+      },
+      "data": bodyparser({})
+    };
+    if(bravAuthData.getType() == 4) {
+      console.log("calling i get profile");
+    }
+    if(bravAuthData.getType() == 2) {
+      console.log("calling get profile");
+      settings.url = "/m/api/profile";
+    }
+    $http(settings)
+    .success(function (response) {
+      console.log(response);
+      if (response.ok) {
+        if(bravAuthData.getType() == 4) next(response.data);
+        if(bravAuthData.getType() == 2) next(response.profile);
+      } else {
+        alert("failed to fetch data");
+        window.location = '#';
+      }
+    })
+    .error(function(data, status) {
+      console.error('error', status, data);
+    });
+  };
+
   this.getHome = function (next) {
     console.log("calling /app/home function");
     var settings = {
@@ -326,22 +362,35 @@ bravAuthModule.controller('appCtrl', function ($scope, bravHomeApi) {
   $scope.heading = "";
   $scope.article = [];
   $scope.sample = "hello sample string";
+  $scope.username = "User";
+
   bravHomeApi.getHome(function (res) {
     $scope.heading = res.data.headline;
     $scope.article = res.data.article;
   });
+
+  bravHomeApi.getProfile(function (res) {
+    $scope.username = res.name;
+  }); 
+
+  $scope.jumpToCreateSessions = function() {
+    window.location = '#/ms/calendar';
+    console.log("jump", "window.location");
+  }
 });
 
 bravAuthModule.controller('indexCtrl', function ($scope, bravAuthData, bravHomeApi, $mdSidenav, tableDefaultOptions) {
 
   $scope.tableDefaultOptions = tableDefaultOptions;
+  $scope.clickedSublinkIndex = -1;
+  $scope.clickedLinkIndex = -1;
 
   $scope.callOpenSideNavFromParent = function (link) {
     $scope.openSideNav(link);
   };
 
   $scope.openLink = {};
-  $scope.openSideNav = function (link) {
+  $scope.openSideNav = function (link, i) {
     if ($scope.openLink != link) {
       $scope.openLink.open = false;
     }
@@ -351,7 +400,15 @@ bravAuthModule.controller('indexCtrl', function ($scope, bravAuthData, bravHomeA
       link.open = !link.open;
       link.id = !link.id;
     }
+    
+    $scope.clickedLinkIndex = i;
+    $scope.clickedSublinkIndex = -1;
   };
+
+  $scope.buttonClicked = function (index) {
+    console.log("the index now is ", $scope.clickedIndex);
+    $scope.clickedSublinkIndex = index;
+  }
 
   $scope.links = [];
   $scope.showText = false;

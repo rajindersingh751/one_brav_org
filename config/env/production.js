@@ -10,7 +10,7 @@
 //  *
 //  */
 
-// module.exports = {
+module.exports = {
 
 //   /***************************************************************************
 //    * Set the default database connection for models in the production        *
@@ -34,10 +34,10 @@
 //    log: {
 //      level: "silent"
 //    },
-//    ssl: {
-// 	    ca: require('fs').readFileSync(require('path').resolve(__dirname,'../../scrts/one_brav_org.ca-bundle')),
-// 	    key: require('fs').readFileSync(require('path').resolve(__dirname,'../../scrts/one.brav.org.key')),
-// 	    cert: require('fs').readFileSync(require('path').resolve(__dirname,'../../scrts/one_brav_org.crt'))
-// 	 }
-
-// };
+    ssl: {
+        ca: require('fs').readFileSync(require('path').resolve(__dirname,'../ssl/my-gd-bundle.crt')),
+        key: require('fs').readFileSync(require('path').resolve(__dirname,'../ssl/my-ssl.key')),
+        cert: require('fs').readFileSync(require('path').resolve(__dirname,'../ssl/my-ssl.crt'))
+    }
+    
+};

@@ -80,11 +80,11 @@
   <div id="wrap-1">
 
     <div class="center" style="margin-top: 10px;">
-      <md-button type="button" class="md-raised md-accent" ng-show="!dynamics.ready && !dynamics.started" ng-click="reloadNowToGetMediaAccess()">
+      <md-button type="button" class="md-raised md-accent button" ng-show="!dynamics.ready && !dynamics.started" ng-click="reloadNowToGetMediaAccess()">
       Ready to start </md-button>
-      <md-button type="button" class="md-raised md-accent" ng-show="dynamics.ready && !dynamics.started" ng-click="startSession()">
+      <md-button type="button" class="md-raised md-accent button" ng-show="dynamics.ready && !dynamics.started" ng-click="startSession()">
       Start Session</md-button>
-      <md-button type="button" class="md-raised md-accent" ng-show="dynamics.started" ng-click="endSession()"> End Session</md-button>
+      <md-button type="button" class="md-raised md-accent button" ng-show="dynamics.started" ng-click="endSession()"> End Session</md-button>
     </div>
 
     <md-card layout-margin style="min-height: 224px;min-width: 300px; max-width:700px; margin-left:8px;">
@@ -92,16 +92,16 @@
         <p align="center"> {{sessionDetails.title}} </p>
 
         <div ng-if="dynamics.started" class="center">
-          <md-button class="md-raised md-accent" aria-label="video_off" ng-if="dynamics.video" ng-click="dynamics.toggleVideo()">
+          <md-button class="md-raised md-accent button" aria-label="video_off" ng-if="dynamics.video" ng-click="dynamics.toggleVideo()">
             <md-icon md-svg-icon="icons/ic_videocam_off_white_48px.svg" id="off_video"></md-icon>
           </md-button>
-          <md-button class="md-raised md-accent" aria-label="video_on" ng-if="!dynamics.video" ng-click="dynamics.toggleVideo()">
+          <md-button class="md-raised md-accent button" aria-label="video_on" ng-if="!dynamics.video" ng-click="dynamics.toggleVideo()">
             <md-icon md-svg-icon="icons/ic_videocam_white_48px.svg" id="on_video"></md-icon>
           </md-button>
-          <md-button class="md-raised md-accent" aria-label="audio_off" ng-if="dynamics.audio" ng-click="dynamics.toggleAudio()">
+          <md-button class="md-raised md-accent button" aria-label="audio_off" ng-if="dynamics.audio" ng-click="dynamics.toggleAudio()">
             <md-icon md-svg-icon="icons/ic_mic_off_white_48px.svg" id="off_audio"></md-icon>
           </md-button>
-          <md-button class="md-raised md-accent" aria-label="audio_on" ng-if="!dynamics.audio" ng-click="dynamics.toggleAudio()">
+          <md-button class="md-raised md-accent button" aria-label="audio_on" ng-if="!dynamics.audio" ng-click="dynamics.toggleAudio()">
             <md-icon md-svg-icon="icons/ic_mic_white_48px.svg" id="on_audio"></md-icon>
           </md-button>
         </div>
@@ -130,8 +130,8 @@
           </div>
         </div>
         <md-card-actions layout="row" layout-align="center" ng-if="myProfile.responded || isOrg">
-          <md-button layout="row" layout-md="column" class="md-raised" ng-click="sample($event)"> Create agreement</md-button>
-          <md-button layout="row" layout-md="column" class="md-raised" ng-click="sample($event)"> Show agreements </md-button>
+          <md-button layout="row" layout-md="column" class="md-raised button" ng-click="sample($event)"> Create agreement</md-button>
+          <md-button layout="row" layout-md="column" class="md-raised button" ng-click="sample($event)"> Show agreements </md-button>
         </md-card-actions>
 
       </md-content>

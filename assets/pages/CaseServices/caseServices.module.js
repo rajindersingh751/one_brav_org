@@ -9,6 +9,10 @@ caseServices = angular.module('caseServices', ['ngRoute','bravAuthModule','payme
         templateUrl: 'pages/CaseServices/html/createMediationSession.html',
         controller: 'createSessionsCtrl'
       })
+      .when("/ms/calendar", { // table
+        templateUrl : 'pages/CaseServices/html/calendar.html',
+        controller: 'calendarCtrl'
+      })
       .when("/ms/all", { // table
         templateUrl : 'pages/CaseServices/html/allSessions.html',
         controller: 'allSessionsCtrl'

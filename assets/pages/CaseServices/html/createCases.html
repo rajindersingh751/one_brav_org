@@ -1,11 +1,14 @@
 <div class="center">
-  <div class="center">
-    <h1>Create a case</h1>
-     <md-subheader class="md-primary">Cases help you to well organize your legal matters, A Case encapsulates many sessions related to same conflict and hence, their management is easier</md-subheader>
-    </div>
+  <h1><label>Create a case</label></h1>
+  <md-card style="margin: 0px;">
+    <md-subheader class="md-primary" style="width: 100%;">
+      Cases help you to organize your legal matters, A case encapsulates many sessions related to the same conflict and hence, their management is easier.
+      <br>
+      Before creating a session, make sure that the related case has been created.
+    </md-subheader>
 
-  <div layout="row" layout-align="center center">
-    <md-content layout-padding>
+    <div layout="row" layout-align="center center">
+      <md-content layout-padding style="width: 100%;">
         <form name="caseForm" autocomplete="off">
 
           <md-input-container class="md-block">
@@ -21,7 +24,7 @@
 
           <md-input-container class="md-block">
             <label>Info</label>
-            <input required type="text" name="info" ng-model="case.info" />
+            <input required type="text" name="info" ng-model="case.info" style="height: 100px"/>
 
             <div ng-messages="caseForm.info.$error" role="alert">
               <div ng-message-exp="['required']">
@@ -29,9 +32,13 @@
               </div>
             </div>
           </md-input-container>
-          <md-button class="md-raised md-primary" type="submit" ng-click="createCase(case)">Create A Case</md-button>
-
+          <div style="text-align: right; color: #598ebf; padding-right: 8px;"><span>Already created the case? Proceed to create a session</span></div>
+          <md-card-actions layout="row" layout-align="center">
+            <md-button class="md-raised md-primary button" type="submit" ng-click="createCase(case)">Create A Case</md-button>
+            <md-button class="md-raised md-primary button" ng-click="jumpToCreateSessions()" style="background-color: #5aace0 !important;">Create A Session</md-button>
+          </md-card-actions>
         </form>
-    </md-content>
-  </div>
+      </md-content>
+    </div>
+  </md-card>
 </div>

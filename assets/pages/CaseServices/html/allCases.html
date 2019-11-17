@@ -31,7 +31,7 @@
           <td md-cell>{{case.title}}</td>
           <td md-cell>{{case.info.length > 100 ? case.info.substring(0,100) + "..." : case.info}}</td>
           <td md-cell>
-            <md-button class="md-raised md-warn" ng-click="modifyCase(case.title,case._id)">Edit Info</md-button>
+            <md-button class="md-raised md-warn button" ng-click="modifyCase(case.title,case._id)">Edit Info</md-button>
           </td>
         </tr>
       </tbody>
@@ -42,6 +42,6 @@
     md-total="{{cases.length}}" md-page-select="true" md-boundary-links="true">
   </md-table-pagination>
 
-  <md-button class="md-raised md-primary" ng-href="#/case/new">Add Case</md-button>
+  <md-button class="md-raised md-primary button" ng-href="#/case/new" style="width: 120px;">Add Case</md-button>
 
 </div>

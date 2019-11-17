@@ -1,4 +1,4 @@
-caseServices.controller('selectMediatorCtrl', function ($scope, msApi, $mdDialog) {
+caseServices.controller('selectMediatorCtrl', function ($scope, msApi, $mdDialog, bravUI) {
     $scope.mediators = []; // this is all mediators
     $scope.currencies = [
         { name: 'United States Dollar, USD', code: 'USD' },
@@ -101,8 +101,13 @@ caseServices.controller('selectMediatorCtrl', function ($scope, msApi, $mdDialog
         }
     };
     $scope.sendMediators = function () {
-        msApi.setMediatorArray($scope.mediatorsArray);
-        window.location = '#/ms/new';
+        if($scope.mediatorsArray.length == 0) {
+          console.log("no mediators");
+          bravUI.showSimpleToast('Please select a mediator');
+        } else {
+          msApi.setMediatorArray($scope.mediatorsArray);
+          window.location = '#/ms/new';
+        }
     };
 
 });

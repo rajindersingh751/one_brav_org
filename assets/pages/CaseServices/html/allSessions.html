@@ -2,8 +2,8 @@
 
   <div ng-if="!sessions.length">
     <h1>You Have No Sessions Yet</h1>
-    <md-button class="md-raised md-primary" ng-href="#/ms/new">Create A Session</md-button>
-    <md-button class="md-raised md-primary" ng-href="#/ms/s">TEST SESSION (Dev-mode)</md-button>
+    <md-button class="md-raised md-primary button" ng-href="#/ms/new">Create A Session</md-button>
+    <md-button class="md-raised md-primary button" ng-href="#/ms/s">TEST SESSION (Dev-mode)</md-button>
   </div>
 
   <div ng-if="sessions.length">
@@ -41,7 +41,7 @@
             <td md-cell>{{ session.sessionObject.description.length > 100 ? session.sessionObject.description.substring(0,100) + "..." : session.sessionObject.description }}</td>
             <td md-cell>{{ session.schedule.str }} </td>
             <td md-cell>
-              <md-button class="md-raised md-primary" ng-click="joinSession(session._id)">Join</md-button>
+              <md-button class="md-raised md-primary button" ng-click="joinSession(session._id)">Join</md-button>
             </td>
           </tr>
         </tbody>

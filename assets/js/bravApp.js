@@ -41,9 +41,12 @@ app.config(function ($routeProvider, $mdThemingProvider) {
     'contrastLightColors': undefined // could also specify this if default was 'dark'
   });
   $mdThemingProvider.theme('default')
-    .primaryPalette('bravPalette')
+    .primaryPalette('bravPalette');
 
   $routeProvider
+  // 我们调用 $routeProvider.when 来配置不同路由的具体信息。 
+  // $routeProvider.when 方法接受2个参数，第一个是路由的url。
+  // 第二个路由的具体配置，包括对应的模板地址，控制器名称等
     .when("/login", {
       templateUrl: 'pages/login/login.html',
       controller: 'authCtrl'
@@ -55,6 +58,10 @@ app.config(function ($routeProvider, $mdThemingProvider) {
     .when("/reset", {
       templateUrl: 'pages/login/reset.html',
       controller: 'resetCtrl'
+    })
+    .when("/terms", {
+      templateUrl: 'pages/login/terms.html',
+      controller: 'termsCtrl'
     });
 
 });
@@ -63,6 +70,8 @@ app.config(function ($routeProvider, $mdThemingProvider) {
 app.controller('authCtrl', authCtrl);
 app.controller('regAuthCtrl', regAuthCtrl);
 // app.controller('appCtrl', appCtrl);
+
+// indexCtrl: The first controller in the home page (index.html)
 app.controller('indexCtrl', indexCtrl);
 
 app.controller('sidebar', function ($scope) {
@@ -109,15 +118,13 @@ function indexCtrl($scope, $rootScope, $http) {
 
   $scope.onload = function () {
     if (!bravAuthData.isAuthed()) {
-      window.location = '/#/login';
+      window.location = '#/login';
       $scope.appswitch.isLoggedIn = false;
       $scope.appswitch.type = 0;
     } else {
       apploader(bravAuthData.auth.token);
     }
   }
-
-
   $scope.pushMainOff = function () {
     var mainView = document.querySelector('.mainView');
     mainView.style.paddingLeft = $scope.activeSidebar ? '300px' : '0';
@@ -235,10 +242,11 @@ var bravAuthData = (function () {
 })();
 
 
+// global variable
 var LoginAPICaller = {
 
   setHttp: function (http) {
-    LoginAPICaller.http = http;
+    LoginAPICaller.http = http; // $http is injected as an attribute
   },
 
   signup: function (user, next) {
@@ -428,7 +436,33 @@ let toastNow = function ($mdToast, text) {
 
 function authCtrl($scope, $http, $mdToast) {
   LoginAPICaller.setHttp($http);
-  $scope.showForm = 0;
+  $scope.showForm = -1;
+
+  // Edited by Ruoxuan Xu: add functions for popping up and hiding of alerting Window
+  // Date: 2019-05-12
+  //----------------------------------
+    $scope.alertMe = function() {
+      $('.alert-wrapper1').css('top', '-100%');
+      $(".alert-cover1").fadeIn("fast", function() {
+          $(".alert-wrapper1").animate({
+              top: '50%'
+          }, 200, 'swing')
+      });
+    }
+
+    $scope.alertDismiss = function() {
+      $(".alert-wrapper1").animate({
+          top: '-100%'
+      },{
+          duration: 200,
+          easing: 'swing',
+          complete: function() {
+              $(".alert-cover1").fadeOut("fast")
+          }
+      });
+    }
+//----------------------------------
+
   $scope.isLoggedIn = function () {
     if (!bravAuthData.isAuthed()) {
       window.location = '/#/login';
@@ -550,4 +584,9 @@ app.controller('resetCtrl', function ($scope) {
   console.log('loaded reset controller');
   bravAuthData.clearAuth();
   window.location = '/#/login';
+});
+
+app.controller('termsCtrl', function ($scope) {
+  console.log('loaded terms controller');  
+  window.location = '/#/terms';
 });

@@ -10,6 +10,9 @@
 
   <link rel="stylesheet" type="text/css" href="styles/a2k_custom_style.css">
   <link rel="stylesheet" type="text/css" href="styles/angular-material.min.css">
+  <link rel='stylesheet' type='text/css' href="styles/css.css">
+  <link rel="stylesheet" href="styles/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/jqueryfuns.css">
 
   <!-- <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap-support.css"> -->
@@ -27,7 +30,15 @@
   <script src="js/dependencies/utils.js"></script>
   <script src="pages/BravAuth/BravAuthModule.js"></script>
   <script src="js/bravApp.js"></script>
+
+  <!-- this is jquery file -->
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/alimaku_jquery.js"></script>
+  <script type="text/javascript" src="http://demo.alimaku.com/index.js"></script>
   <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+    }
     .new--background {
       background: #598EBF;
     }
@@ -44,7 +55,6 @@
   <md-toolbar style="height: 6rem;" layout-align="center center">
     <div class="md-toolbar-tools">
       <img src="img/edited-logo.png" alt="Brāv" class="logo" />
-
       <span flex></span>
       <md-button ng-if="!appswitch.isLoggedIn" class="new--top-right-button" aria-label="Register" ng-href="#/reg">Register</md-button>
       <md-button ng-if="!appswitch.isLoggedIn" class="new--top-right-button" aria-label="Login" ng-href="#/login">Login</md-button>

@@ -6,10 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>Brāv</title>
   <script src="js/browserDetection.js"></script>
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
   />
 
-  <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,800' rel='stylesheet' type='text/css' />
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600,800' rel='stylesheet' type='text/css' />
   <!-- <link rel="icon" type="image/png" href="img/favicon.png" /> -->
   <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/css/froala_editor.min.css' rel='stylesheet' type='text/css'
   />
@@ -128,6 +129,10 @@
 
 
   </script>
+  <script src="pages/CaseServices/controllers/sessions/calendarCtrl.js">
+
+
+  </script>
   <script src="pages/CaseServices/controllers/sessions/allSessionsCtrl.js">
 
 
@@ -207,8 +212,20 @@
       box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28) !important;
     }
 
+    body {
+      font-family: 'Raleway', sans-serif !important;
+    }
+
+    h1 {
+      font-weight: 800 !important;
+    }
+
+    p, span, label{
+      font-weight: 400 !important;
+    }
+
     .logo.new--brand-img {
-      width: 100px !important;
+      width: 90px !important;
       height: 70px !important;
     }
 
@@ -222,7 +239,78 @@
     }
 
     .new--remove-btton-style {
-      min-width: 45px !important;
+      min-width: 45px;
+    }
+    .container {
+      padding-right: 30px;
+      padding-left: 30px;
+      margin-left: 80px;
+      margin-right: auto;
+    }
+
+    .md-primary, input, multi-selection, md-select {
+      background-color: #ebebeb !important;
+/*      height: 36px !important;*/
+      /*width: 100% !important;*/
+      border-radius: 3px !important; 
+      border: 0 !important;
+      display: block !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    div.right-side-panel {
+      margin-left: 0px;
+    }
+
+    div.col-sm-2.padding-zero.user-account {
+      padding: 0px;
+    }
+
+    .create-availability {
+      padding-left: 0px;
+    }
+
+    .button {
+      font-weight: bold !important;
+    }
+
+    .button span {
+      font-weight: bold !important;
+    }
+
+    .md-primary.button span {
+      color: #ebebeb;
+    }
+
+    .md-primary.button {
+      background-color: #598ebf !important;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    div.md-errors-spacer {
+       min-height: 15px;
+    }
+
+    .clicked {
+      background-color: #a7a9ab;
+    }
+
+    a.md-button:not([disabled]):hover {
+      background-color: transparent;
+    }
+
+    .buttons-in-row-left {
+      margin-right: 10px !important;
+    }
+
+    .buttons-in-row-right {
+      margin-left: 10px !important;
+    }
+
+    p.contact {
+      font-weight: 700 !important;
     }
 
   </style>
@@ -240,7 +328,7 @@
   <md-toolbar layout="row" layout-align="center center" calss="new--header">
     <div class="custom-header">
       <div class="top-header">
-        <img src="img/header-logo.png" alt="Brāv" class="logo new--brand-img">
+        <img src="img/larger-logo.png" alt="Brāv" class="logo new--brand-img">
 
       </div>
       <div class="top-header-right">
@@ -288,11 +376,11 @@
   </md-toolbar>
 
   <md-content ng-controller="sidebarLinksCtrl" ng-init="loadSideBarLinks()" layout="row" flex>
-    <md-sidenav class="md-sidenav-left white" md-component-id="left" md-whiteframe="4" md-is-locked-open="true" style="width: 100px !important; overflow:auto; z-index:0;">
+    <md-sidenav class="md-sidenav-left white" md-component-id="left" md-whiteframe="4" md-is-locked-open="true" style="overflow:auto;z-index:0;width: 90px !important;">
       <md-list flex class="pa2">
         <md-list-item ng-click="callOpenSideNavFromParent(link)" aria-label="{{link.title}}" ng-repeat-start="link in links" ng-if="!link.disable">
 
-          <md-button class="new--remove-btton-style" ng-href="{{link.href}}" ng-click="openSideNav(link)">
+          <md-button class="new--remove-btton-style" ng-href="{{link.href}}" ng-click="openSideNav(link, $index)" ng-class="{clicked: $index==clickedLinkIndex}">
             <img ng-src="{{link.src}}" class="pa1 ma0" width="40" height="40" />
             <md-tooltip md-direction="right" class="large f3 white">{{link.title}}</md-tooltip>
             <img ng-show="link.open" src="img/Icons/angle-down.png" height="10px" width="10px" />
@@ -300,18 +388,20 @@
 
         </md-list-item>
 
-        <md-list-item ng-show="outOfNav && link.open" ng-repeat-end ng-repeat="sublink in link.sub" aria-label="{{sublink.title}}"
-          style="margin-left:10px;">
-          <a ng-href="{{sublink.href}}">
-            <img ng-src="{{sublink.src}}" class="pa1 ma0" width="40" height="40" />
-            <md-tooltip md-direction="right" class="large f3 white">{{sublink.title}}</md-tooltip>
-          </a>
+        <md-list-item ng-show="outOfNav && link.open" ng-repeat-end ng-repeat="sublink in link.sub" aria-label="{{sublink.title}}" style="margin-left:10px;">
+          <md-button style="margin: 0px; padding: 0px; min-width: 65px;" ng-class="{clicked: $index==clickedSublinkIndex}" ng-click="buttonClicked($index)">
+            <a ng-href="{{sublink.href}}">
+              <img ng-src="{{sublink.src}}" class="pa1 ma0" width="40" height="40" />
+              <md-tooltip md-direction="right" class="large f3 white">{{sublink.title}}</md-tooltip>
+            </a>
+          </md-button>
         </md-list-item>
       </md-list>
     </md-sidenav>
 
     <md-content flex ng-init="onload()" class="ph2 brav-bg">
-      <div ng-view flex></div>
+      <div ng-view flex>
+      </div>
     </md-content>
 
   </md-content>

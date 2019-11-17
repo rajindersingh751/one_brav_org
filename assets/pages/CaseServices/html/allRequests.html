@@ -37,9 +37,9 @@
             <td md-cell>{{session.sessionObject.title}}</td>
             <td md-cell>{{session.sessionObject.case.title}}</td>
             <td md-cell>{{session.sessionObject.description.length > 100 ? session.sessionObject.description.substring(0,100) + "..." : session.sessionObject.description}}</td>
-            <td md-cell><span ng-repeat="a in session.individuals" class="md-button md-raised" ng-disabled="true">{{a.email}}</span></td>
+            <td md-cell><span ng-repeat="a in session.individuals" class="md-button md-raised button" ng-disabled="true">{{a.email}}</span></td>
             <td md-cell>
-              <md-button class="md-raised md-accent" ng-click="viewSession(session._id)">View</md-button>
+              <md-button class="md-raised md-accent button" ng-click="viewSession(session._id)">View</md-button>
             </td>
           </tr>
         </tbody>
@@ -51,6 +51,9 @@
     </md-table-pagination>
   </div>
 
-  <md-button class="md-raised md-primary" ng-href="#/ms/new">Create New Session</md-button>
+  <md-card-actions layout="row" layout-align="center"> 
+    <md-button class="md-raised md-primary button buttons-in-row-left" ng-href="#/ms/new">Create New Session</md-button>
+    <md-button class="md-raised md-primary button buttons-in-row-right" ng-href="#/ms/calendar">Check My Calendar</md-button>
+  </md-card-actions>
 
 </div>

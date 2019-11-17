@@ -42,26 +42,26 @@
           </div>
         </div>
         <md-card-actions layout="row" layout-align="center" ng-if="myProfile.responded || isOrg">
-          <md-button layout="row" layout-md="column" class="md-raised" ng-click="changeFees($event)" ng-if="!buttons.join && isMediator">
+          <md-button layout="row" layout-md="column" class="md-raised button" ng-click="changeFees($event)" ng-if="!buttons.join && isMediator">
             Offer Discounts</md-button>
-          <md-button layout="row" layout-md="column" class="md-primary md-raised" ng-click="weivePUF($event)" ng-if="buttons.pay && isMediator">
+          <md-button layout="row" layout-md="column" class="md-primary md-raised button" ng-click="weivePUF($event)" ng-if="buttons.pay && isMediator">
             Redeem</md-button>
 
-          <md-button layout="row" layout-md="column" class="md-primary md-raised" ng-click="scheduleSession($event,sessionDetails.schedule,sessionDetails.id)"
+          <md-button layout="row" layout-md="column" class="md-primary md-raised button" ng-click="scheduleSession($event,sessionDetails.schedule,sessionDetails.id)"
             ng-if="buttons.join"> Schedule Session</md-button>
-          <md-button layout="row" layout-md="column" class="md-primary md-raised" ng-click="payNow($event)" ng-if="buttons.pay && !isMediator">
+          <md-button layout="row" layout-md="column" class="md-primary md-raised button" ng-click="payNow($event)" ng-if="buttons.pay && !isMediator">
             Pay now</md-button>
-          <md-button layout="row" layout-md="column" class="md-primary md-raised" ng-click="redeem($event)" ng-if="buttons.pay && !isMediator">
+          <md-button layout="row" layout-md="column" class="md-primary md-raised button" ng-click="redeem($event)" ng-if="buttons.pay && !isMediator">
             Redeem</md-button>
-          <md-button layout="row" layout-md="column" class="md-primary md-raised" ng-click="join()" ng-if="buttons.join && sessionDetails.schedule" style="padding-left: 25px;">
+          <md-button layout="row" layout-md="column" class="md-primary md-raised button" ng-click="join()" ng-if="buttons.join && sessionDetails.schedule" style="padding-left: 25px;">
             Join </md-button>
         </md-card-actions>
 
         <md-card-actions layout="row" layout-align="center" ng-if="isMediator||isIndividual">
-          <md-button ng-if="!myProfile.responded" layout="row" layout-md="column" class="md-primary md-raised" ng-click="respond(true)">Accept Session</md-button>
-          <md-button ng-if="!myProfile.responded" layout="row" layout-md="column" class="md-raised" ng-click="respond(false)"> Reject Session</md-button>
+          <md-button ng-if="!myProfile.responded" layout="row" layout-md="column" class="md-primary md-raised button" ng-click="respond(true)">Accept Session</md-button>
+          <md-button ng-if="!myProfile.responded" layout="row" layout-md="column" class="md-raised button" ng-click="respond(false)"> Reject Session</md-button>
           <!-- <md-button ng-if="myProfile.responded" layout="row" layout-md="column" class="md-raised" ng-disabled="true" >{{myProfile.accepted=='true'?'Accepted':'Rejected'}}</md-button> -->
-          <md-button ng-if="myProfile.responded" layout="row" layout-md="column" class="md-raised">{{myProfile.accepted=='true'?'Accepted':'Rejected'}}</md-button>
+          <md-button ng-if="myProfile.responded" layout="row" layout-md="column" class="md-raised button">{{myProfile.accepted=='true'?'Accepted':'Rejected'}}</md-button>
         </md-card-actions>
 
       </md-content>

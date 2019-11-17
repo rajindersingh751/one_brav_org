@@ -1,11 +1,16 @@
 const whatToUse = 1;
 const home = '/home/ubuntu/';
+// const paths = {
+//   enable: true,
+//   cert: home + 'ssl/my-ssl.crt',
+//   key: home + 'ssl/my-ssl.key'
+// };
 const paths = {
   enable: true,
-  cert: home + 'ssl/cert_chain.crt',
-  key: home + 'ssl/one_brav_org.key'
-};
-
+  ca: require('fs').readFileSync(require('path').resolve(__dirname,'../ssl/my-gd-bundle.crt')),
+  key: require('fs').readFileSync(require('path').resolve(__dirname,'../ssl/my-ssl.key')),
+  cert: require('fs').readFileSync(require('path').resolve(__dirname,'../ssl/my-ssl.crt'))
+}
 const dev = {
   port: 1337,
   secure: {
@@ -15,9 +20,18 @@ const dev = {
   models: {
     connection: 'bravMongo'
   },
+  // ssl: {
+  //   paths: paths,
+  //   ok: 'yes we have secure the path',
+  // },
   ssl: {
-    paths: paths,
-    ok: 'yes we have secure the path',
+    paths:{
+      enable: true
+    },
+    ca: require('fs').readFileSync(require('path').resolve(__dirname,'../ssl/my-gd-bundle.crt')),
+    key: require('fs').readFileSync(require('path').resolve(__dirname,'../ssl/my-ssl.key')),
+    cert: require('fs').readFileSync(require('path').resolve(__dirname,'../ssl/my-ssl.crt')),
+    ok: 'yes we have secure the path'
   },
   signalMasterConfig: {
     "isDev": true,
@@ -45,7 +59,6 @@ const dev = {
     ]
   }
 };
-
 const init = () => {
   if (whatToUse == 1) {
     paths.enable = true;

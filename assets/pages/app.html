@@ -1,10 +1,44 @@
+<style>
+
+  h1 {
+	font-weight: 800 !important;
+    color: black;
+    font-size: 3em;
+    text-transform: uppercase;
+  }
+
+  .custom-tooltip {
+    font-size: 15px;
+  }
+
+</style>
+
 <div class="tc"  ng-init="onload()">
-  <div align="center" class="f2 ma3 pa3" >
-  {{heading }}
-  </div>
-  <div class="tc" align="center">
-      <div class="db">
-        <div ng-repeat="line in article track by $index" class=" f4 mv2 pa2">{{line}}</div>
-      </div>
+  <div class="container" style="margin-left: 0px; width: auto;">
+    <h1>Hi {{username}},</h1>
+  <!--   <div class="f2 mv2 pa2" >
+    {{heading}}
+    </div>
+    <div class="tc">
+        <div class="db">
+          <div ng-repeat="line in article track by $index" class="f4 mv2 pa2">{{line}}</div>
+        </div>
+    </div> -->
+    <div class="col-sm-2 padding-zero user-account">
+      <img src="img/user-img.jpg" alt="">
+    </div>
+    <div class="col-sm-10 user-data" style="padding-left: 0px;">
+          <div style="text-transform: lowercase;">{{username}}@gmail.com</div>
+          <div>(408) 728-3047</div>
+          <div style="font-weight: 600;">Brāv Client</div>
+        </div>
+    <div class="clearfix"></div>
+
+  <!--   <div class="f2 mv2 pa2">To schedule a session, get started by:</div> -->
+    <md-button class="md-primary button" ng-click="jumpToCreateSessions()">Find An Availability and Schedule
+      <md-tooltip>
+        <span ng-repeat="line in article track by $index" class="custom-tooltip">{{line}} </span>
+      </md-tooltip>
+    </md-button>
   </div>
 </div>

@@ -1,12 +1,12 @@
 <div class="center">
 
   <div ng-if="!agreements.length">
-    <h1 class="f1 black-60">No Requested Agreements Yet</h1>
-    <md-button class="md-raised md-primary" ng-href="#/agreements/new">Create an Agreement</md-button>
+    <h1 class="f1"><label>No Requested Agreements Yet</label></h1>
+    <md-button class="md-raised md-primary button" ng-href="#/agreements/new">Create an Agreement</md-button>
   </div>
 
   <div ng-if="agreements.length">
-    <h1 class="f1 black-60">All Agreements</h1>
+    <h1 class="f1"><label>All Agreements</label></h1>
     <md-card style="margin:0px">
         <md-input-container style="margin:15px;">
             <label>Filter Results</label>
